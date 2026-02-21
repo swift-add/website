@@ -42,7 +42,7 @@ export const Ad402Slot: React.FC<Ad402SlotProps> = ({
   const [trackingMilestones] = useState([10, 30, 60, 120, 240, 480]); // 10s, 30s, 1m, 2m, 4m, 8m
   const [nextMilestoneIndex, setNextMilestoneIndex] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  
+
   const [sessionId] = useState(() => {
     if (typeof window !== 'undefined') {
       let sid = localStorage.getItem('ad_session_id');
@@ -59,14 +59,14 @@ export const Ad402Slot: React.FC<Ad402SlotProps> = ({
   const fetchAdContent = async () => {
     try {
       setIsLoading(true);
-      
+
       console.log('🔍 Fetching ad for slot:', slotId);
       const response = await fetch(`/api/ads/${slotId}`);
-      
+
       if (response.ok) {
         const data = await response.json();
         console.log('📦 Ad data:', data);
-        
+
         if (data.hasAd && data.contentUrl && data.placementId) {
           setAdContent(data.contentUrl);
           setAdPlacementId(data.placementId);
@@ -100,36 +100,36 @@ export const Ad402Slot: React.FC<Ad402SlotProps> = ({
   };
 
   // 🎯 CLIENT-SIDE QUEUE CHECKER (runs when ads are viewed)
-useEffect(() => {
-  if (!hasAd || !adPlacementId) return;
+  useEffect(() => {
+    if (!hasAd || !adPlacementId) return;
 
-  // Check every 30 seconds if queue needs processing
-  const queueChecker = setInterval(async () => {
-    try {
-      console.log('🔍 Checking if queue needs processing...');
-      
-      const response = await fetch('/api/process-queue', {
-        method: 'POST'
-      });
-      
-      const data = await response.json();
-      
-      if (data.activatedCount > 0) {
-        console.log('🎉 Queue processed! Refreshing ad...');
-        fetchAdContent();
+    // Check every 30 seconds if queue needs processing
+    const queueChecker = setInterval(async () => {
+      try {
+        console.log('🔍 Checking if queue needs processing...');
+
+        const response = await fetch('/api/process-queue', {
+          method: 'POST'
+        });
+
+        const data = await response.json();
+
+        if (data.activatedCount > 0) {
+          console.log('🎉 Queue processed! Refreshing ad...');
+          fetchAdContent();
+        }
+      } catch (error) {
+        console.error('❌ Queue check failed:', error);
       }
-    } catch (error) {
-      console.error('❌ Queue check failed:', error);
-    }
-  }, 30000); // Check every 30 seconds
+    }, 30000); // Check every 30 seconds
 
-  return () => clearInterval(queueChecker);
-}, [hasAd, adPlacementId]);
+    return () => clearInterval(queueChecker);
+  }, [hasAd, adPlacementId]);
 
   // 🎯 NEW: Reusable function to track the view
   const trackView = async (viewDuration: number) => {
-    const walletAddress = typeof window !== 'undefined' 
-      ? localStorage.getItem('stellar_wallet_address') 
+    const walletAddress = typeof window !== 'undefined'
+      ? localStorage.getItem('stellar_wallet_address')
       : null;
 
     console.log('📤 Sending tracking request:', {
@@ -180,7 +180,7 @@ useEffect(() => {
       (entries) => {
         const entry = entries[0];
         setIsInView(entry.isIntersecting);
-        
+
         if (entry.isIntersecting) {
           console.log('👁️ Ad entered view:', slotId);
         } else {
@@ -206,7 +206,7 @@ useEffect(() => {
     // Start timer only if: ad is in view and there are milestones left
     if (isInView && nextMilestoneIndex < trackingMilestones.length) {
       console.log('⏱️ Starting 1-second interval timer for:', slotId);
-      
+
       intervalRef.current = setInterval(() => {
         setCumulativeViewTime(prevTime => prevTime + 1);
       }, 1000); // Ticks every second
@@ -233,10 +233,10 @@ useEffect(() => {
     // If cumulative time reaches or exceeds the current milestone, track it
     if (cumulativeViewTime >= currentMilestone) {
       console.log(`✅ Milestone ${currentMilestone}s reached! Tracking view...`);
-      
+
       // Call the tracking function
       trackView(currentMilestone);
-      
+
       // Move to the next milestone
       setNextMilestoneIndex(prevIndex => prevIndex + 1);
     }
@@ -251,7 +251,7 @@ useEffect(() => {
       slotRef.current.setAttribute('data-durations', durations.join(','));
       slotRef.current.setAttribute('data-category', category);
     }
-    
+
     fetchAdContent();
     fetchQueueInfo();
   }, [slotId, size, price, durations, category]);
@@ -302,6 +302,7 @@ useEffect(() => {
 
   // If ad exists, show the ad with "Book Next Slot" button
   if (hasAd && adContent) {
+    console.log("ad: " + adContent)
     return (
       <div style={{ position: 'relative', display: 'inline-block' }}>
         <div
@@ -320,25 +321,29 @@ useEffect(() => {
             margin: '0 auto'
           }}
         >
-          <img
-            src={adContent}
-            alt="Advertisement"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              cursor: 'pointer'
-            }}
+          <button
             onClick={() => {
               console.log(`Ad clicked: ${slotId}`);
             }}
-            onError={() => {
-              setHasAd(false);
-              setAdContent(null);
-            }}
-          />
+            className="w-full h-full p-0 border-none bg-transparent cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
+            aria-label={`View Advertisement ${slotId}`}
+          >
+            <img
+              src={adContent}
+              alt="Advertisement"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
+              onError={() => {
+                setHasAd(false);
+                setAdContent(null);
+              }}
+            />
+          </button>
         </div>
-        
+
         {/* Book Next Slot Button */}
         {clickable && (
           <button
@@ -360,11 +365,12 @@ useEffect(() => {
               alignItems: 'center',
               justifyContent: 'center',
               fontFamily: 'JetBrains Mono, monospace',
-              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-              transition: 'all 0.2s ease',
               zIndex: 10,
-              padding: queueInfo && queueInfo.totalInQueue > 0 ? '0 6px' : '0'
+              padding: queueInfo && queueInfo.totalInQueue > 0 ? '0 6px' : '0',
+              outline: 'none',
+              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
             }}
+            className="focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = 'hsl(var(--primary) / 0.9)';
               e.currentTarget.style.transform = 'scale(1.1)';
@@ -373,8 +379,8 @@ useEffect(() => {
               e.currentTarget.style.backgroundColor = 'hsl(var(--primary))';
               e.currentTarget.style.transform = 'scale(1)';
             }}
-            title={queueInfo && queueInfo.totalInQueue > 0 
-              ? `Book next slot (${queueInfo.totalInQueue} in queue)` 
+            title={queueInfo && queueInfo.totalInQueue > 0
+              ? `Book next slot (${queueInfo.totalInQueue} in queue)`
               : "Book next slot"
             }
           >
@@ -389,8 +395,17 @@ useEffect(() => {
   return (
     <div
       ref={slotRef}
-      className={`ad402-slot ${className} ${clickable ? 'cursor-pointer hover:bg-secondary transition-colors' : ''}`}
+      className={`ad402-slot ${className} ${clickable ? 'cursor-pointer hover:bg-secondary transition-colors focus:ring-2 focus:ring-primary focus:outline-none' : ''}`}
       onClick={handleSlotClick}
+      onKeyDown={(e) => {
+        if (clickable && (e.key === 'Enter' || e.key === ' ')) {
+          e.preventDefault();
+          handleSlotClick();
+        }
+      }}
+      tabIndex={clickable ? 0 : -1}
+      role={clickable ? 'button' : undefined}
+      aria-label={clickable ? `Purchase Ad Slot ${slotId}` : undefined}
       style={{
         width: dimensions.width,
         height: dimensions.height,
@@ -409,9 +424,9 @@ useEffect(() => {
         margin: '0 auto'
       }}
     >
-      <div 
-        style={{ 
-          textAlign: 'center', 
+      <div
+        style={{
+          textAlign: 'center',
           color: 'hsl(var(--foreground))',
           fontFamily: 'JetBrains Mono, monospace',
           width: '100%',
@@ -463,7 +478,7 @@ function getDimensions(size: string) {
 function getOptimalFontSizes(dimensions: { width: number; height: number }) {
   const { width, height } = dimensions;
   const baseSize = Math.min(width, height) * 0.08;
-  
+
   return {
     icon: `${Math.max(12, Math.min(24, baseSize * 1.5))}px`,
     title: `${Math.max(8, Math.min(14, baseSize))}px`,

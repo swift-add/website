@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { polygon, polygonAmoy } from "wagmi/chains";
+import { useBackNavigation, useArrowNavigation } from "@/hooks/use-keyboard";
 
 // Create a stable config instance
 const config = getDefaultConfig({
@@ -16,6 +17,8 @@ const config = getDefaultConfig({
 });
 
 const Providers = ({ children }: { children: ReactNode }) => {
+  useBackNavigation();
+  useArrowNavigation(); // Global arrow navigation for modals
   // Create a stable query client instance
   const [queryClient] = useState(() => new QueryClient({
     defaultOptions: {

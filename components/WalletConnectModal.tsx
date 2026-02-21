@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useEscapeKey } from '@/hooks/use-keyboard';
 
 // Simple SVG icons
 const WalletIcon = ({ className }: { className?: string }) => (
@@ -42,6 +43,8 @@ export default function WalletConnectModal({ isOpen, onClose, onConnect, onDisco
     }
   }, [isConnected, address, chainId, onConnect]);
 
+  useEscapeKey(onClose, isOpen);
+
   const handleDisconnect = () => {
     disconnect();
     onDisconnect?.();
@@ -50,7 +53,7 @@ export default function WalletConnectModal({ isOpen, onClose, onConnect, onDisco
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" data-modal="true">
       <Card className="w-full max-w-md">
         <CardHeader>
           <div className="flex items-center justify-between">
