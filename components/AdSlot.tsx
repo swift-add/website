@@ -43,7 +43,7 @@ export const AdSlot: React.FC<AdSlotProps> = ({
           const contentUrl = AdService.getContentUrl(paymentRecord.media_hash);
           setAdContent(contentUrl);
           onAdLoad?.(true);
-          
+
           // Track ad view
           const slotIndex = AdService.generateSlotIndex(route, position, size);
           AdAnalytics.trackAdView(slotIndex, paymentRecord.media_hash);
@@ -57,7 +57,7 @@ export const AdSlot: React.FC<AdSlotProps> = ({
         const errorMessage = err instanceof Error ? err.message : 'Failed to load ad';
         setError(errorMessage);
         onAdLoad?.(false);
-        
+
         // Track ad error
         const slotIndex = AdService.generateSlotIndex(route, position, size);
         AdAnalytics.trackAdError(slotIndex, errorMessage);
@@ -84,14 +84,13 @@ export const AdSlot: React.FC<AdSlotProps> = ({
 
   if (isLoading) {
     return (
-      <div 
+      <div
         className={`ad-slot loading ${className}`}
-        role="region"
         aria-label="Sponsored advertisement"
         aria-live="polite"
         aria-atomic="true"
-        style={{ 
-          width, 
+        style={{
+          width,
           height,
           maxWidth: '100%',
           maxHeight: '100%',
@@ -112,13 +111,13 @@ export const AdSlot: React.FC<AdSlotProps> = ({
 
   if (error) {
     return (
-      <div 
+      <div
         className={`ad-slot error ${className}`}
         role="region"
         aria-label="Sponsored advertisement"
         aria-live="polite"
         aria-atomic="true"
-        style={{ 
+        style={{
           width, 
           height,
           maxWidth: '100%',
@@ -140,14 +139,15 @@ export const AdSlot: React.FC<AdSlotProps> = ({
 
   if (adContent) {
     return (
-      <div 
+      <div
         className={`ad-slot paid ${className}`}
         role="region"
         aria-label="Sponsored advertisement"
         aria-live="polite"
         aria-atomic="true"
-        style={{ 
-          width, 
+        style={{
+          width,
+
           height,
           maxWidth: '100%',
           maxHeight: '100%',
@@ -157,22 +157,7 @@ export const AdSlot: React.FC<AdSlotProps> = ({
           backgroundColor: 'hsl(var(--background))'
         }}
       >
-        <img
-          src={adContent}
-          alt="Advertisement"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            cursor: 'pointer'
-          }}
-          onError={() => {
-            setError('Failed to load ad image');
-            setAdContent(null);
-          }}
-          onLoad={() => {
-            console.log(`Ad loaded successfully for ${route}:${position}`);
-          }}
+        <button
           onClick={() => {
             // Track ad click
             const slotIndex = AdService.generateSlotIndex(route, position, size);
@@ -180,21 +165,41 @@ export const AdSlot: React.FC<AdSlotProps> = ({
           }}
           aria-label="Book advertising slot"
           aria-describedby="slot-description"
-        />
+          className="w-full h-full p-0 border-none bg-transparent cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
+          aria-label="View Advertisement"
+        >
+          <img
+            src={adContent}
+            alt="Advertisement"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+            onError={() => {
+              setError('Failed to load ad image');
+              setAdContent(null);
+            }}
+            onLoad={() => {
+              console.log(`Ad loaded successfully for ${route}:${position}`);
+            }}
+          />
+        </button>
+          
       </div>
     );
   }
 
   // Show fallback content for unpaid slots
   return (
-    <div 
+    <div
       className={`ad-slot fallback ${className}`}
       role="region"
       aria-label="Sponsored advertisement"
       aria-live="polite"
       aria-atomic="true"
-      style={{ 
-        width, 
+      style={{
+        width,
         height,
         maxWidth: '100%',
         maxHeight: '100%',

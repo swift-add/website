@@ -9,11 +9,11 @@ const Header = () => {
           <h1 className="text-lg md:text-xl font-bold font-mono">
             SwiftAd Platform
           </h1>
-          {/* <ConnectButton
+          <ConnectButton
             showBalance={false}
             accountStatus="address"
             label="Connect"
-          /> */}
+          />
         </div>
       </Wrapper>
     </header>
