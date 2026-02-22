@@ -86,6 +86,10 @@ export const AdSlot: React.FC<AdSlotProps> = ({
     return (
       <div 
         className={`ad-slot loading ${className}`}
+        role="region"
+        aria-label="Sponsored advertisement"
+        aria-live="polite"
+        aria-atomic="true"
         style={{ 
           width, 
           height,
@@ -110,6 +114,10 @@ export const AdSlot: React.FC<AdSlotProps> = ({
     return (
       <div 
         className={`ad-slot error ${className}`}
+        role="region"
+        aria-label="Sponsored advertisement"
+        aria-live="polite"
+        aria-atomic="true"
         style={{ 
           width, 
           height,
@@ -134,6 +142,10 @@ export const AdSlot: React.FC<AdSlotProps> = ({
     return (
       <div 
         className={`ad-slot paid ${className}`}
+        role="region"
+        aria-label="Sponsored advertisement"
+        aria-live="polite"
+        aria-atomic="true"
         style={{ 
           width, 
           height,
@@ -166,6 +178,8 @@ export const AdSlot: React.FC<AdSlotProps> = ({
             const slotIndex = AdService.generateSlotIndex(route, position, size);
             AdAnalytics.trackAdClick(slotIndex, adContent);
           }}
+          aria-label="Book advertising slot"
+          aria-describedby="slot-description"
         />
       </div>
     );
@@ -175,6 +189,10 @@ export const AdSlot: React.FC<AdSlotProps> = ({
   return (
     <div 
       className={`ad-slot fallback ${className}`}
+      role="region"
+      aria-label="Sponsored advertisement"
+      aria-live="polite"
+      aria-atomic="true"
       style={{ 
         width, 
         height,

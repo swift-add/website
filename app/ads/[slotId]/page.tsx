@@ -122,6 +122,7 @@ export default function AdSlotPage() {
           <Button 
             onClick={() => router.back()} 
             variant="ghost" 
+            aria-label="Go back"
             className="mb-4 -ml-2"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -199,7 +200,7 @@ export default function AdSlotPage() {
                   <div className="space-y-2">
                     <Label htmlFor="contentType">Content Type</Label>
                     <Select onValueChange={(value) => setValue('contentType', value as 'image' | 'video' | 'text')}>
-                      <SelectTrigger className="focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                      <SelectTrigger aria-label="Select content type" className="focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         <SelectValue placeholder="Select content type" />
                       </SelectTrigger>
                       <SelectContent>
@@ -245,7 +246,7 @@ export default function AdSlotPage() {
                   <div className="space-y-2">
                     <Label htmlFor="duration">Duration</Label>
                     <Select onValueChange={(value) => setValue('duration', value)}>
-                      <SelectTrigger className="focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                      <SelectTrigger aria-label="Select duration" className="focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         <SelectValue placeholder="Select duration" />
                       </SelectTrigger>
                       <SelectContent>
@@ -310,6 +311,7 @@ export default function AdSlotPage() {
                   <Button
                     type="submit"
                     disabled={submitting}
+                    aria-label="Submit advertisement"
                     className="w-full bg-gray-900 hover:bg-gray-800 text-white py-3 rounded-lg font-medium transition-colors"
                     size="lg"
                   >

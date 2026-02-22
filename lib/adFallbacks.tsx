@@ -16,7 +16,7 @@ export const AdFallbacks = {
     <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded text-center">
       <h3 className="font-bold">Advertise Here!</h3>
       <p className="text-sm opacity-90">Reach thousands of users</p>
-      <button className="mt-2 bg-white text-blue-600 px-3 py-1 rounded text-xs font-semibold">
+      <button aria-label="Get started with advertising" className="mt-2 bg-white text-blue-600 px-3 py-1 rounded text-xs font-semibold">
         Get Started
       </button>
     </div>
@@ -31,6 +31,8 @@ export const AdFallbacks = {
       </div>
       <button 
         className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-blue-700 transition-colors"
+        aria-label="Book advertising slot"
+        aria-describedby="slot-description"
         onClick={() => {
           // Redirect to checkout with slot details
           const params = new URLSearchParams({

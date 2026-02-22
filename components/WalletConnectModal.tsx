@@ -59,6 +59,7 @@ export default function WalletConnectModal({ isOpen, onClose, onConnect, onDisco
               onClick={onClose}
               variant="ghost"
               size="sm"
+              aria-label="Close wallet connect modal"
             >
               <XMarkIcon className="w-4 h-4" />
             </Button>
@@ -88,6 +89,7 @@ export default function WalletConnectModal({ isOpen, onClose, onConnect, onDisco
                   onClick={handleDisconnect}
                   variant="ghost"
                   size="sm"
+                  aria-label="Disconnect wallet"
                 >
                   <XMarkIcon className="w-4 h-4" />
                 </Button>
@@ -105,6 +107,7 @@ export default function WalletConnectModal({ isOpen, onClose, onConnect, onDisco
                 <Button
                   onClick={onClose}
                   className="w-full"
+                  aria-label="Continue with connected wallet"
                 >
                   Continue
                 </Button>
@@ -112,6 +115,7 @@ export default function WalletConnectModal({ isOpen, onClose, onConnect, onDisco
                   onClick={handleDisconnect}
                   variant="destructive"
                   className="w-full"
+                  aria-label="Disconnect wallet"
                 >
                   Disconnect Wallet
                 </Button>

@@ -108,6 +108,7 @@ export default function StellarWalletButton({
           </div>
           <button
             onClick={handleDisconnect}
+            aria-label="Disconnect Stellar wallet"
             className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
           >
             Disconnect
@@ -122,6 +123,7 @@ export default function StellarWalletButton({
       <button
         onClick={handleConnect}
         disabled={isLoading}
+        aria-label="Connect Stellar wallet"
         className={`px-4 py-2 text-white rounded transition-colors ${
           isLoading
             ? "bg-gray-400 cursor-not-allowed"

@@ -142,7 +142,7 @@ export default function PublisherDashboard() {
           <div className="bg-card p-6 border border-border shadow-sm">
             <div className="flex items-center">
               <div className="p-2 bg-secondary border border-border">
-                <svg className="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg aria-hidden="true" className="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                 </svg>
               </div>
@@ -158,7 +158,7 @@ export default function PublisherDashboard() {
           <div className="bg-card p-6 border border-border shadow-sm">
             <div className="flex items-center">
               <div className="p-2 bg-secondary border border-border">
-                <svg className="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg aria-hidden="true" className="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-10 0a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2" />
                 </svg>
               </div>
@@ -174,8 +174,7 @@ export default function PublisherDashboard() {
           <div className="bg-card p-6 border border-border shadow-sm">
             <div className="flex items-center">
               <div className="p-2 bg-secondary border border-border">
-                <svg className="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <svg aria-hidden="true" className="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
               </div>
@@ -191,7 +190,7 @@ export default function PublisherDashboard() {
           <div className="bg-card p-6 border border-border shadow-sm">
             <div className="flex items-center">
               <div className="p-2 bg-secondary border border-border">
-                <svg className="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg aria-hidden="true" className="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                 </svg>
               </div>
@@ -211,7 +210,7 @@ export default function PublisherDashboard() {
             <h2 className="text-2xl font-mono font-bold text-card-foreground">Recent Ad Placements</h2>
           </div>
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-border">
+            <table className="min-w-full divide-y divide-border" aria-label="Recent ad placements">
               <thead className="bg-secondary">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-mono font-medium text-muted-foreground uppercase tracking-wider">
@@ -288,7 +287,7 @@ export default function PublisherDashboard() {
           <div className="bg-card p-6 border border-border shadow-sm">
             <h3 className="text-lg font-mono font-semibold text-card-foreground mb-4">Create New Ad Slot</h3>
             <p className="text-muted-foreground mb-4 font-mono">Add a new ad slot to your website to start earning revenue.</p>
-            <button className="w-full bg-primary text-primary-foreground py-2 px-4 hover:bg-primary/90 transition-colors font-mono">
+            <button aria-label="Create new ad slot" className="w-full bg-primary text-primary-foreground py-2 px-4 hover:bg-primary/90 transition-colors font-mono">
               Create Slot
             </button>
           </div>
@@ -296,7 +295,7 @@ export default function PublisherDashboard() {
           <div className="bg-card p-6 border border-border shadow-sm">
             <h3 className="text-lg font-mono font-semibold text-card-foreground mb-4">View Analytics</h3>
             <p className="text-muted-foreground mb-4 font-mono">Get detailed insights into your ad performance and revenue.</p>
-            <button className="w-full bg-secondary text-secondary-foreground py-2 px-4 hover:bg-secondary/80 transition-colors font-mono">
+            <button aria-label="View analytics" className="w-full bg-secondary text-secondary-foreground py-2 px-4 hover:bg-secondary/80 transition-colors font-mono">
               View Analytics
             </button>
           </div>
@@ -304,7 +303,7 @@ export default function PublisherDashboard() {
           <div className="bg-card p-6 border border-border shadow-sm">
             <h3 className="text-lg font-mono font-semibold text-card-foreground mb-4">Withdraw Earnings</h3>
             <p className="text-muted-foreground mb-4 font-mono">Withdraw your accumulated earnings to your wallet.</p>
-            <button className="w-full bg-secondary text-secondary-foreground py-2 px-4 hover:bg-secondary/80 transition-colors font-mono">
+            <button aria-label="Withdraw earnings" className="w-full bg-secondary text-secondary-foreground py-2 px-4 hover:bg-secondary/80 transition-colors font-mono">
               Withdraw
             </button>
           </div>

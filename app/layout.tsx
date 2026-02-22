@@ -40,6 +40,7 @@ export default function RootLayout({
           </main>
         </Providers>
         <ToastContainer />
+        <p id="slot-description" className="sr-only">Opens booking flow for advertisement placement</p>
       </body>
     </html>
   );

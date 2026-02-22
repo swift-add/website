@@ -91,6 +91,7 @@ export default function TestAdsPage() {
           </p>
           <Button 
             onClick={createTestSlot}
+            aria-label="Create test ad slot"
             className="mt-4 font-mono"
             variant="outline"
           >
@@ -107,7 +108,7 @@ export default function TestAdsPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button onClick={createTestSlot} className="font-mono">
+              <Button onClick={createTestSlot} aria-label="Create first test ad slot" className="font-mono">
                 Create Your First Test Slot
               </Button>
             </CardContent>

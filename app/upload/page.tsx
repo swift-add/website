@@ -313,6 +313,7 @@ function UploadPageContent() {
           <Button
             onClick={() => router.back()}
             variant="ghost"
+            aria-label="Go back"
             className="mb-6 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg"
           >
             <ArrowLeftIcon className="w-4 h-4 mr-2" />
@@ -416,6 +417,7 @@ function UploadPageContent() {
                     }}
                     variant="outline"
                     size="sm"
+                    aria-label="Remove selected file"
                     className="rounded-lg border-gray-200 hover:bg-gray-50"
                   >
                     Remove
@@ -424,6 +426,7 @@ function UploadPageContent() {
                 <Button
                   onClick={handleUpload}
                   disabled={uploadStatus.type === 'uploading' || uploadStatus.type === 'storing' || !paymentData}
+                  aria-label="Upload advertisement to IPFS"
                   className="w-full bg-black hover:bg-gray-800 text-white font-semibold h-12 rounded-lg text-base shadow-sm"
                 >
                   {uploadStatus.type === 'uploading' || uploadStatus.type === 'storing'

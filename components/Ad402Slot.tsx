@@ -278,6 +278,10 @@ useEffect(() => {
       <div
         ref={slotRef}
         className={`ad402-slot ${className}`}
+        role="region"
+        aria-label="Sponsored advertisement"
+        aria-live="polite"
+        aria-atomic="true"
         style={{
           width: dimensions.width,
           height: dimensions.height,
@@ -307,6 +311,10 @@ useEffect(() => {
         <div
           ref={slotRef}
           className={`ad402-slot ${className}`}
+          role="region"
+          aria-label="Sponsored advertisement"
+          aria-live="polite"
+          aria-atomic="true"
           style={{
             width: dimensions.width,
             height: dimensions.height,
@@ -332,6 +340,8 @@ useEffect(() => {
             onClick={() => {
               console.log(`Ad clicked: ${slotId}`);
             }}
+            aria-label="Book advertising slot"
+            aria-describedby="slot-description"
             onError={() => {
               setHasAd(false);
               setAdContent(null);
@@ -343,6 +353,8 @@ useEffect(() => {
         {clickable && (
           <button
             onClick={handleSlotClick}
+            aria-label="Book advertising slot"
+            aria-describedby="slot-description"
             style={{
               position: 'absolute',
               top: '-8px',
@@ -391,6 +403,11 @@ useEffect(() => {
       ref={slotRef}
       className={`ad402-slot ${className} ${clickable ? 'cursor-pointer hover:bg-secondary transition-colors' : ''}`}
       onClick={handleSlotClick}
+      role="button"
+      aria-label="Book advertising slot"
+      aria-describedby="slot-description"
+      aria-live="polite"
+      aria-atomic="true"
       style={{
         width: dimensions.width,
         height: dimensions.height,
@@ -431,7 +448,12 @@ useEffect(() => {
           {price} XLM • {size}
         </div>
         {queueInfo && !queueInfo.isAvailable && (
-          <div style={{ fontSize: fontSizes.small, marginBottom: '1px', lineHeight: '1.1', color: 'hsl(var(--primary))', fontWeight: 'bold' }}>
+          <div
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            style={{ fontSize: fontSizes.small, marginBottom: '1px', lineHeight: '1.1', color: 'hsl(var(--primary))', fontWeight: 'bold' }}
+          >
             {queueInfo.totalInQueue} in queue
           </div>
         )}

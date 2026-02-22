@@ -107,6 +107,7 @@ function TestUploadPageContent() {
           <Button
             onClick={() => window.history.back()}
             variant="outline"
+            aria-label="Go back"
             className="mb-4"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -180,6 +181,7 @@ function TestUploadPageContent() {
                       type="button"
                       variant="outline"
                       size="sm"
+                      aria-label="Remove selected file"
                       onClick={() => setSelectedFile(null)}
                     >
                       Remove
@@ -215,6 +217,7 @@ function TestUploadPageContent() {
               <Button
                 onClick={handleUpload}
                 disabled={!selectedFile || uploading || !paymentData}
+                aria-label="Upload advertisement"
                 className="w-full"
               >
                 {uploading ? 'Uploading...' : 'Upload Advertisement'}

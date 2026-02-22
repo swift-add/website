@@ -520,6 +520,7 @@ function CheckoutPageContent() {
           <Button
             onClick={() => router.back()}
             variant="ghost"
+            aria-label="Go back"
             className="mb-4 -ml-4 text-sm text-gray-600 hover:text-gray-900"
           >
             <ArrowLeftIcon className="w-4 h-4 mr-2" />
@@ -564,7 +565,13 @@ function CheckoutPageContent() {
         )}
 
         {queueInfo && !queueInfo.isAvailable && (
-          <Card className="mb-6 border-yellow-500 bg-yellow-50">
+          <Card
+            className="mb-6 border-yellow-500 bg-yellow-50"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            aria-label="Queue position information"
+          >
             <CardContent className="p-6">
               <div className="text-center mb-4">
                 <ClockIcon className="w-8 h-8 text-yellow-600 mx-auto mb-2" />
@@ -582,7 +589,7 @@ function CheckoutPageContent() {
                   )}
                   <div className="flex justify-between px-4">
                     <span>Ads in queue:</span>
-                    <span className="font-bold">{queueInfo.totalInQueue}</span>
+                    <span className="font-bold" aria-live="polite" aria-atomic="true">{queueInfo.totalInQueue}</span>
                   </div>
                   <div className="flex justify-between px-4">
                     <span>Minimum bid:</span>
@@ -723,6 +730,7 @@ function CheckoutPageContent() {
                 </p>
                 <Button 
                   onClick={connectStellar} 
+                  aria-label="Connect Stellar wallet"
                   className="w-full bg-gray-900 hover:bg-gray-800 text-white"
                   disabled={connectionStatus.type === 'loading'}
                 >
@@ -750,6 +758,8 @@ function CheckoutPageContent() {
                   <div className="space-y-3">
                     <Button
                       onClick={handleStellarPayment}
+                      aria-label="Book advertising slot"
+                      aria-describedby="slot-description"
                       className="w-full bg-gray-900 hover:bg-gray-800 text-white h-12 font-medium"
                       disabled={connectionStatus.type === 'loading'}
                     >
@@ -769,6 +779,7 @@ function CheckoutPageContent() {
                     <Button
                       onClick={handleDisconnect}
                       variant="outline"
+                      aria-label="Disconnect Stellar wallet"
                       className="w-full border-gray-300 text-gray-700 hover:bg-gray-50"
                     >
                       Disconnect Wallet

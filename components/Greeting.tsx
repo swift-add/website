@@ -77,6 +77,7 @@ const Greeting = () => {
           <button
             className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white py-4 px-8 rounded-md"
             onClick={setGreeting}
+            aria-label="Set greeting on the blockchain"
             disabled={
               !address ||
               !newGreeting ||
@@ -92,6 +93,7 @@ const Greeting = () => {
             <button
               className="text-sm text-gray-500 text-center underline hover:opacity-80"
               onClick={openConnectModal}
+              aria-label="Connect your wallet to set a greeting"
             >
               Connect your wallet to set a new greeting
             </button>
